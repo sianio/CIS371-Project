@@ -2,9 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+// import Box from '@material-ui/core/Box';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-const homeStyle = makeStyles((theme) => ({
+const dashboardStyle = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -12,16 +15,13 @@ const homeStyle = makeStyles((theme) => ({
     // eslint-disable-next-line quotes
     flexDirection: "row",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
 }));
 
-const HomeToolbar = () => {
-  const classes = homeStyle();
+const DashboardBar = () => {
+  const classes = dashboardStyle();
 
   return (
     <div className={classes.root}>
@@ -29,11 +29,14 @@ const HomeToolbar = () => {
         <Typography variant="h6" className={classes.title}>
           Blanks
         </Typography>
-        <Button color="inherit">Login</Button>
-        <Button color="inherit">Sign Up</Button>
+        <Button color="inherit">Create New Document</Button>
+        <Tabs>
+          <Tab color="inherit" label="My Documents" />
+          <Tab color="inherit" label="Shared With Me" />
+        </Tabs>
       </AppBar>
     </div>
   );
 };
 
-export default HomeToolbar;
+export default DashboardBar;

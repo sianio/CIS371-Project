@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import HomeToolbar from './components/toolbar/HomeToolbar';
+import DashboardBar from './components/toolbar/DashboardBar';
 
 const App = () => (
   <div className="App">
-    <HomeToolbar />
+    <DashboardBar />
     <h1>Hello React</h1>
   </div>
 );

@@ -19,5 +19,5 @@ const authReducer = (currentState, action) => {
   return currentState;
 };
 
-const AppStore = createStore(authReducer);
-export default AppStore;
+const AuthStore = createStore(authReducer);
+export default AuthStore;
