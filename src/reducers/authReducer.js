@@ -1,20 +1,23 @@
-import { createStore } from "react-redux";
+import { createStore } from 'redux';
+
 
 let initState = {
-  userName: undefined,
-  authenticated: false
+  userName: "",
+  authenticated: false,
 };
 
 const authReducer = (currentState, action) => {
+  // Is this right?
+  let nextState = null;
   switch (action.type) {
-    case "changeUser":
-      const nextState = { ...currentState, userName: action.userName };
+    case 'changeUser':
+      nextState = { ...currentState, userName: action.userName };
       return nextState;
     case 'changeAuth':
-      const nextState = {...currentState, authenticated: action.authenticated};
+      nextState = { ...currentState, authenticated: action.authenticated };
       return nextState;
     default:
-        break;
+      break;
   }
   return currentState;
 };
