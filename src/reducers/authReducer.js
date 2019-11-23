@@ -1,8 +1,10 @@
 import { createStore } from 'redux';
 
 
+// eslint-disable-next-line prefer-const
 let initState = {
-  userName: "",
+  userName: '',
+  uid: '',
   authenticated: false,
 };
 
@@ -15,6 +17,9 @@ const authReducer = (currentState, action) => {
       return nextState;
     case 'changeAuth':
       nextState = { ...currentState, authenticated: action.authenticated };
+      return nextState;
+    case 'changeUId':
+      nextState = { ...currentState, uid: action.uid };
       return nextState;
     default:
       break;
