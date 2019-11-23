@@ -10,7 +10,6 @@ import { gray } from 'ansi-colors';
 import HomeToolbar from '../components/toolbar/HomeToolbar';
 
 import { AppAuth } from '../firebase-init';
-import AuthStore from '../reducers/authReducer';
 
 
 const loginStyle = makeStyles(() => ({
@@ -29,11 +28,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     AppAuth.onAuthStateChanged((u) => {
-      const authState = u !== null;
-      const { uid } = AppAuth.currentUser.providerData;
-      AuthStore.dispatch({ type: 'changeUser', userName: email });
-      AuthStore.dispatch({ type: 'changeAuth', authenticated: authState });
-      AuthStore.dispatch({ type: 'changeUId', uid });
+      alert(`Auth state has changed`);
     });
   }, []);
 
