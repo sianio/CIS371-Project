@@ -1,63 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DescriptionIcon from '@material-ui/icons/Description';
-import FolderIcon from '@material-ui/icons/Folder';
+// import FolderIcon from '@material-ui/icons/Folder';
 
-const DocumentItem = (props) =>{
-  const { docName, dateModified } = props;
+import Paper from '@material-ui/core/Paper';
 
-  const openDoc = () => {
-    // TODO: Open a document
-    alert(`Opening file ${docName}`);
-    return true;
-  };
+import DashboardBar from '../components/toolbar/DashboardBar';
 
-  return (
-    <ListItem button onClick={openDoc}>
-      <ListItemIcon>
-        <DescriptionIcon />
-      </ListItemIcon>
-      <ListItemText primary={docName} />
-      <ListItemText primary={dateModified} />
-    </ListItem>
-  );
-};
+import { AppDB } from '../firebase-init.js';
 
-// NOT DONE
-const FolderType = (props) => {
-  const { folderName, folderPk } = props;
-  const [folderItems, setFolderItems] = useState(undefined);
-  const [open, setOpen] = useState(false);
-  
-  // const showFolderItems = () => {
-  //   const listReturn = undefined
-  //   if (!open) {
-  //     return <div />
-  //   }
-  //   else {
+// const DocumentItem = props => {
+//   const { docName, dateModified } = props;
 
-  //   }
-  // }
-  return (
-    <ListItem button>
-      <ListItemIcon>
-        <FolderIcon />
-      </ListItemIcon>
-      <ListItemText primary={folderName} />
-    </ListItem>
-  );
-};
+//   const openDoc = () => {
+//     // TODO: Open a document
+//     alert(`Opening file ${docName}`);
+//     return true;
+//   };
 
+//   return (
+//     <ListItem button onClick={openDoc}>
+//       <ListItemIcon>
+//         <DescriptionIcon />
+//       </ListItemIcon>
+//       <ListItemText primary={docName} />
+//       <ListItemText primary={dateModified} />
+//     </ListItem>
+//   );
+// };
 
-const DashboardScreen = () => {
-  return (
-    <div>
-      <p>This is a placeholder</p>
-    </div>
-  );
-};
+// // NOT DONE
+// const FolderType = (props) => {
+//   const { folderName, folderPk } = props;
+//   const [folderItems, setFolderItems] = useState(undefined);
+//   const [open, setOpen] = useState(false);
 
-export default DashboardScreen;
+//   // const showFolderItems = () => {
+//   //   const listReturn = undefined
+//   //   if (!open) {
+//   //     return <div />
+//   //   }
+//   //   else {
+
+//   //   }
+//   // }
+//   return (
+//     <ListItem button>
+//       <ListItemIcon>
+//         <FolderIcon />
+//       </ListItemIcon>
+//       <ListItemText primary={folderName} />
+//     </ListItem>
+//   );
+// };
+
+// const DashboardScreen = () => {
+//   const [docList, setDocList] = useState(undefined);
+//   const [docDbRoot, setDocDbRoot] = useState(undefined);
+//   const [usersRoot, setUsersRoot] = useState(undefined);
+//   useEffect(() => {
+//     setDocDbRoot(AppDB.collection('documents'));
+//   });
+// };
+
+// export default DashboardScreen;
