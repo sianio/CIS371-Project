@@ -18,10 +18,10 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <LoginScreen />
+      <LoginScreen authInstance={bundledAuthProps} />
     </div>
   );
-}
+};
 
 export default withFirebaseAuth({
   providers,
