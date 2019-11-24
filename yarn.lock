@@ -10308,6 +10308,11 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-with-firebase-auth@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-with-firebase-auth/-/react-with-firebase-auth-1.2.0.tgz#a54e0eabaa6a5d839c7cd26b945337eabf82cfd7"
+  integrity sha512-wLJP7sM2WmUBvHcuP2EBgcNbSuPPZCkeAW9EQ/Q5DV6cmM2wqyEu92zKmWR9sBJ/Y64C+X0XThB8F4NBDLnHNg==
+
 react@^0.14.0-beta3:
   version "0.14.9"
   resolved "https://registry.yarnpkg.com/react/-/react-0.14.9.tgz#9110a6497c49d44ba1c0edd317aec29c2e0d91d1"
