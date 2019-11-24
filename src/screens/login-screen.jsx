@@ -30,47 +30,47 @@ const LoginScreen = () => {
       alert(`Auth state has changed`);
       // TODO: Change the current route to the dashboard.
     });
-  }, []);
+  });
 
   const classes = loginStyle();
 
-  const login = () => {
-    AppAuth.signInWithEmailAndPassword(email, password)
-      .then((u) => {
-        // eslint-disable-next-line no-alert
-        alert('Signed in successfuly');
-        // Do the routing stuff below. Remove the alert eventually
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-alert
-        alert(`Error with sign in ${err}`);
-      });
-  };
+  // const login = () => {
+  //   AppAuth.signInWithEmailAndPassword(email, password)
+  //     .then((u) => {
+  //       // eslint-disable-next-line no-alert
+  //       alert('Signed in successfuly');
+  //       // Do the routing stuff below. Remove the alert eventually
+  //     })
+  //     .catch((err) => {
+  //       // eslint-disable-next-line no-alert
+  //       alert(`Error with sign in ${err}`);
+  //     });
+  // };
 
-  const signUp = () => {
-    AppAuth.createUserWithEmailAndPassword(email, password)
-      .then((u) => {
-        // eslint-disable-next-line no-alert
-        alert(`Created an account with email ${email}.`);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-alert
-        alert(`Failed to create an account ${err}`);
-      });
-  };
+  // const signUp = () => {
+  //   AppAuth.createUserWithEmailAndPassword(email, password)
+  //     .then((u) => {
+  //       // eslint-disable-next-line no-alert
+  //       alert(`Created an account with email ${email}.`);
+  //     })
+  //     .catch((err) => {
+  //       // eslint-disable-next-line no-alert
+  //       alert(`Failed to create an account ${err}`);
+  //     });
+  // };
 
-  // This is a placeholder function to sign out of the application.
-  const logout = () => {
-    setEmail('');
-    setPassword('');
-    AppAuth.signOut()
-      .then(() => {
-        alert('Signed out ');
-      })
-      .catch((err) => {
-        alert(`Error on sign out ${err}`);
-      });
-  };
+  // // This is a placeholder function to sign out of the application.
+  // const logout = () => {
+  //   setEmail('');
+  //   setPassword('');
+  //   AppAuth.signOut()
+  //     .then(() => {
+  //       alert('Signed out ');
+  //     })
+  //     .catch((err) => {
+  //       alert(`Error on sign out ${err}`);
+  //     });
+  // };
 
   return (
     <Paper className={classes.root} elevation={10}>
