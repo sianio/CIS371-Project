@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import LoginScreen from './screens/login-screen';
+// import LoginScreen from './screens/login-screen';
+import DashboardScreen from './screens/dashboard-screen';
 
 const App = () => (
   <div className="App">
-    <LoginScreen />
+    <DashboardScreen />
+    {/* <LoginScreen /> */}
   </div>
 );
 
