@@ -23,7 +23,8 @@ const dashboardStyle = makeStyles(() => ({
   },
 }));
 
-const DashboardBar = () => {
+const DashboardBar = (props) => {
+  const { tabVal, tabOnChange } = props;
   const classes = dashboardStyle();
 
   return (
@@ -33,7 +34,10 @@ const DashboardBar = () => {
           Blanks
         </Typography>
         <Button color="inherit">Create New Document</Button>
-        <Tabs>
+        <Tabs
+          value={tabVal}
+          onChange={tabOnChange}
+        >
           <Tab color="inherit" label="My Documents" />
           <Tab color="inherit" label="Shared With Me" />
         </Tabs>

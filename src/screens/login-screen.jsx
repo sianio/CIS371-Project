@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-// import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
 import { flexbox } from '@material-ui/system';
 import TextField from '@material-ui/core/TextField';
 import { gray } from 'ansi-colors';
@@ -29,6 +28,7 @@ const LoginScreen = () => {
   useEffect(() => {
     AppAuth.onAuthStateChanged((u) => {
       alert(`Auth state has changed`);
+      // TODO: Change the current route to the dashboard.
     });
   }, []);
 
