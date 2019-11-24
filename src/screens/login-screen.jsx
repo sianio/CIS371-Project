@@ -35,56 +35,36 @@ const loginStyle = makeStyles(() => ({
   },
 }));
 
-const LoginScreen = () => {
+const LoginScreen = ({ authInstance }) => {
+  const {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    user,
+    error,
+    signOut,
+  } = authInstance;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // useEffect(() => {
-  //   AppAuth.onAuthStateChanged((u) => {
-  //     alert(`Auth state has changed`);
-  //     // TODO: Change the current route to the dashboard.
-  //   });
-  // }, []);
+  // TODO: Make this change screens to the dashboard on update.
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
-  const classes = loginStyle();
+  // TODO: Make this give some sort of message to the user saying invalid password
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   const login = () => {
-    AppAuth.signInWithEmailAndPassword(email, password)
-      .then((u) => {
-        // eslint-disable-next-line no-alert
-        alert('Signed in successfuly');
-        // Do the routing stuff below. Remove the alert eventually
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-alert
-        alert(`Error with sign in ${err}`);
-      });
+    signInWithEmailAndPassword(email, password);
   };
 
   const signUp = () => {
-    AppAuth.createUserWithEmailAndPassword(email, password)
-      .then((u) => {
-        // eslint-disable-next-line no-alert
-        alert(`Created an account with email ${email}.`);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-alert
-        alert(`Failed to create an account ${err}`);
-      });
+    createUserWithEmailAndPassword(email, password);
   };
 
-  // This is a placeholder function to sign out of the application.
-  const logout = () => {
-    setEmail('');
-    setPassword('');
-    AppAuth.signOut()
-      .then(() => {
-        alert('Signed out ');
-      })
-      .catch((err) => {
-        alert(`Error on sign out ${err}`);
-      });
-  };
+  const classes = loginStyle();
 
   return (
     <Box className={classes.main} height="100%">
