@@ -1,10 +1,10 @@
 import React from 'react';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
-import withFirebaseAuth from 'react-with-firebase-auth'
+import withFirebaseAuth from 'react-with-firebase-auth';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-// import firebaseConfig from './firebaseConfig';
-import LoginScreen from './screens/login-screen';
+import DashboardScreen from './screens/dashboard-screen';
 import { AppAuth } from './firebase-init';
 
 const firebaseAppAuth = AppAuth;
@@ -18,7 +18,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <LoginScreen authInstance={bundledAuthProps} />
+      <DashboardScreen authInstance={bundledAuthProps} />
     </div>
   );
 };
