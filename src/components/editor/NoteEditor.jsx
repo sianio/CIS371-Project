@@ -4,7 +4,7 @@ import 'draft-js/dist/Draft.css';
 
 const NoteEditor = () => {
   const [editorState, setEditorState] = useState(
-    EditorState.createEmpty()
+    EditorState.createEmpty(),
   );
 
   return (
