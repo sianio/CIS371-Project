@@ -3,19 +3,36 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { flexbox } from '@material-ui/system';
 import TextField from '@material-ui/core/TextField';
-import { gray } from 'ansi-colors';
 import HomeToolbar from '../components/toolbar/HomeToolbar';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Box from '@material-ui/core/Box';
+import { sizing } from '@material-ui/system';
+import { AppAuth } from '../firebase-init';
+
 
 const loginStyle = makeStyles(() => ({
   root: {
-    color: gray,
-    display: flexbox
+    height: 200,
+    width: 450,
+    margin: 20,
+    padding: 10,
+    textAlign: 'center',
+    display: 'inline-box',
+    background: '#c5cae9',
   },
   textField: {
-    width: 200
-  }
+    width: 400,
+    padding: 10,
+  },
+  heading: {
+    width: 600,
+    padding: 15,
+    color: 'white',
+  },
+  main: {
+    background: '#7986cb',
+  },
 }));
 
 const LoginScreen = ({ authInstance }) => {
@@ -50,11 +67,12 @@ const LoginScreen = ({ authInstance }) => {
   const classes = loginStyle();
 
   return (
-    <Paper className={classes.root} elevation={10}>
-      <HomeToolbar />
-      <Typography variant="h5" component="h3" className={classes.heading}>
+    <Box className={classes.main} height="100%">
+    <HomeToolbar />
+    <Typography variant="h5" component="h3" className={classes.heading}>
         Welcome, login or sign-up!
       </Typography>
+    <Paper className={classes.root} elevation={10}>
       <TextField
         id="login"
         required
@@ -75,16 +93,18 @@ const LoginScreen = ({ authInstance }) => {
         type="password"
         label="Password"
       />
-      <Button color="inherit" onClick={login}>
-        Login
-      </Button>
-      <Button color="inherit" onClick={signUp}>
-        Sign Up
-      </Button>
-      <Button color="inherit" onClick={signOut}>
-        Logout (PLACEHOLDER)
-      </Button>
+      <ButtonGroup
+              variant="contained"
+              color='#e8eaf6'
+              size="large"
+              aria-label="large contained button group"
+      >
+              <Button onClick={login}>Login</Button>
+              <Button onClick={signUp}>Sign Up</Button>
+              <Button onClick={logout}>Log Out (PLACEHOLDER)</Button>
+      </ButtonGroup>
     </Paper>
+    </Box>
   );
 };
 

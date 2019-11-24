@@ -6,7 +6,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import DashboardScreen from './screens/dashboard-screen';
 import { AppAuth } from './firebase-init';
-
+import LoginScreen from './screens/login-screen';
+        
 const firebaseAppAuth = AppAuth;
 
 const providers = {
@@ -18,7 +19,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <DashboardScreen authInstance={bundledAuthProps} />
+      <LoginScreen authInstance={bundledAuthProps} />
     </div>
   );
 };
