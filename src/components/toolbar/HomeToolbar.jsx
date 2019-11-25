@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const homeStyle = makeStyles((theme) => ({
@@ -29,8 +28,6 @@ const HomeToolbar = () => {
         <Typography variant="h6" className={classes.title}>
           Blanks
         </Typography>
-        <Button color="inherit">Login</Button>
-        <Button color="inherit">Sign Up</Button>
       </AppBar>
     </div>
   );
