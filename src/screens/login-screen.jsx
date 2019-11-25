@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -49,7 +50,11 @@ const LoginScreen = ({ authInstance }) => {
 
   const classes = loginStyle();
 
-  return (
+  const routeToDashboard = () => (
+    <Redirect to="/dashboard" />
+  );
+
+  const renderLogin = () => (
     <Paper className={classes.root} elevation={10}>
       <HomeToolbar />
       <Typography variant="h5" component="h3" className={classes.heading}>
@@ -85,6 +90,19 @@ const LoginScreen = ({ authInstance }) => {
         Logout (PLACEHOLDER)
       </Button>
     </Paper>
+  );
+
+  const checkRendering = () => {
+    if (user === null) {
+      return renderLogin();
+    }
+    return routeToDashboard();
+  };
+
+  return (
+    <div>
+      {checkRendering()}
+    </div>
   );
 };
 
