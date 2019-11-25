@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,7 +11,7 @@ import DashboardBar from '../components/toolbar/DashboardBar';
 
 import { AppDB } from '../firebase-init.js';
 
-const DocumentItem = (props) => {
+const DocumentItem = props => {
   const { docName, dateModified } = props;
 
   const openDoc = () => {
@@ -32,7 +32,7 @@ const DocumentItem = (props) => {
 };
 
 const DashboardScreen = ({ authInstance }) => {
-  const {user, signOut, error} = authInstance;
+  const { user, signOut, error } = authInstance;
 
   const [myDocList, setMyDocList] = useState([]);
   const [sharedDocList, setShareDocList] = useState([]);
@@ -45,27 +45,36 @@ const DashboardScreen = ({ authInstance }) => {
     if (user !== null) {
       console.log(user);
     }
-  });
-  
+  }, [user]);
+
   const onTabChange = (event, value) => {
     setTabIndex(value);
+    console.log(`Tab value changed to ${value}`);
   };
 
-  return (
-    <div>
-      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} />
-      <Paper>
-        <List>
-          <ListItem>
-            <ListItemText primary="place1" />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="place2" />
-          </ListItem>
-        </List>
-      </Paper>
-    </div>
-  );
+  const render = () => {
+    if (user !== null) {
+      return (
+        <div>
+          <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} authInstance={{ user, signOut }} />
+          <Paper>
+            <List>
+              <ListItem>
+                <ListItemText primary="place1" />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="place2" />
+              </ListItem>
+            </List>
+          </Paper>
+        </div>
+      );
+    }
+
+    return <Redirect exact path="/" />;
+  };
+
+  return <div>{render()}</div>;
 };
 
 export default DashboardScreen;

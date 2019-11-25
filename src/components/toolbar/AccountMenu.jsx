@@ -17,7 +17,8 @@ const accountStyles = makeStyles(() => ({
 }));
 
 
-const AccountMenu = () => {
+const AccountMenu = ({ authInstance }) => {
+  const { user, signOut } = authInstance;
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = accountStyles();
 
@@ -35,6 +36,11 @@ const AccountMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    handleClose();
+    signOut();
+  };
+
   return (
     <div className={classes.root}>
       <IconButton onClick={handleClick}>
@@ -46,10 +52,10 @@ const AccountMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         elevation={0}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
+        // anchorOrigin={{
+        //   vertical: 'bottom',
+        //   horizontal: 'center',
+        // }}
         transformOrigin={{
           vertical: 'top',
           horizontal: 'center',
@@ -58,7 +64,7 @@ const AccountMenu = () => {
         <MenuItem onClick={handleClose}>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleSignOut}>
           Sign Out
         </MenuItem>
       </Menu>
