@@ -12,7 +12,8 @@ import {
 import LoginScreen from './screens/login-screen';
 import DashboardScreen from './screens/dashboard-screen';
 import { AppAuth } from './firebase-init';
-
+import LoginScreen from './screens/login-screen';
+        
 const firebaseAppAuth = AppAuth;
 
 const providers = {
