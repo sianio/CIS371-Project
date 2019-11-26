@@ -11,7 +11,6 @@ import Box from '@material-ui/core/Box';
 import { sizing } from '@material-ui/system';
 import { AppAuth } from '../firebase-init';
 
-
 const loginStyle = makeStyles(() => ({
   root: {
     height: 200,
@@ -20,11 +19,11 @@ const loginStyle = makeStyles(() => ({
     padding: 10,
     textAlign: 'center',
     display: 'inline-box',
-    background: '#c5cae9',
+    background: '#c5cae9'
   },
   textField: {
     width: 400,
-    padding: 10,
+    padding: 10
   },
   heading: {
     width: 600,
@@ -33,7 +32,7 @@ const loginStyle = makeStyles(() => ({
   },
   main: {
     background: '#7986cb',
-  },
+  }
 }));
 
 const LoginScreen = ({ authInstance }) => {
@@ -42,15 +41,10 @@ const LoginScreen = ({ authInstance }) => {
     createUserWithEmailAndPassword,
     user,
     error,
-    signOut,
+    signOut
   } = authInstance;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // TODO: Make this change screens to the dashboard on update.
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   // TODO: Make this give some sort of message to the user saying invalid password
   useEffect(() => {
@@ -67,63 +61,58 @@ const LoginScreen = ({ authInstance }) => {
 
   const classes = loginStyle();
 
-  const routeToDashboard = () => (
-    <Redirect to="/dashboard" />
-  );
+  const routeToDashboard = () => <Redirect to="/dashboard" />;
 
   const renderLogin = () => (
-    <Paper className={classes.root} elevation={10}>
+    <Box>
+      {/* <Paper className={classes.root} elevation={10}> */}
       <HomeToolbar />
       <Typography variant="h5" component="h3" className={classes.heading}>
         Welcome, login or sign-up!
       </Typography>
-    <Paper className={classes.root} elevation={10}>
-      <TextField
-        id="login"
-        required
-        variant="outlined"
-        className={classes.textField}
-        onChange={(event) => setEmail(event.target.value)}
-        value={email}
-        type="text"
-        label="Username"
-      />
-      <TextField
-        id="password"
-        required
-        variant="outlined"
-        className={classes.textField}
-        onChange={(event) => setPassword(event.target.value)}
-        value={password}
-        type="password"
-        label="Password"
-      />
-      <ButtonGroup
-              variant="contained"
-              color='#e8eaf6'
-              size="large"
-              aria-label="large contained button group"
-      >
-              <Button onClick={login}>Login</Button>
-              <Button onClick={signUp}>Sign Up</Button>
-              <Button onClick={logout}>Log Out (PLACEHOLDER)</Button>
-      </ButtonGroup>
-    </Paper>
+      <Paper className={classes.root} elevation={10}>
+        <TextField
+          id="login"
+          required
+          variant="outlined"
+          className={classes.textField}
+          onChange={event => setEmail(event.target.value)}
+          value={email}
+          type="text"
+          label="Username"
+        />
+        <TextField
+          id="password"
+          required
+          variant="outlined"
+          className={classes.textField}
+          onChange={event => setPassword(event.target.value)}
+          value={password}
+          type="password"
+          label="Password"
+        />
+        <ButtonGroup
+          variant="contained"
+          color="#e8eaf6"
+          size="large"
+          aria-label="large contained button group"
+        >
+          <Button onClick={login}>Login</Button>
+          <Button onClick={signUp}>Sign Up</Button>
+          {/* <Button onClick={logout}>Log Out (PLACEHOLDER)</Button> */}
+        </ButtonGroup>
+      </Paper>
     </Box>
   );
 
   const checkRendering = () => {
-    if (user === null) {
+    if (user === null || user === undefined) {
       return renderLogin();
     }
     return routeToDashboard();
   };
 
-  return (
-    <div>
-      {checkRendering()}
-    </div>
-  );
+  return <div>{checkRendering()}</div>;
 };
 
 export default LoginScreen;

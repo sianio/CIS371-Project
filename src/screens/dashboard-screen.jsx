@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 
 import DashboardBar from '../components/toolbar/DashboardBar';
 
-import { AppDB } from '../firebase-init.js';
+import { AppAuth, AppDB } from '../firebase-init.js';
 
 const DocumentItem = props => {
   const { docName, dateModified } = props;
@@ -32,28 +32,44 @@ const DocumentItem = props => {
 };
 
 const DashboardScreen = ({ authInstance }) => {
-  const { user, signOut, error } = authInstance;
+  const { user, signOut } = authInstance;
 
-  const [myDocList, setMyDocList] = useState([]);
-  const [sharedDocList, setShareDocList] = useState([]);
+  // const [myDocList, setMyDocList] = useState([]);
+  // const [sharedDocList, setShareDocList] = useState([]);
+  const [uidState, setUidState] = useState(undefined);
   const [docDbRoot, setDocDbRoot] = useState(undefined);
   const [usersRoot, setUsersRoot] = useState(undefined);
   const [tabIndex, setTabIndex] = useState(0);
 
-  // Setup content instances.
   useEffect(() => {
-    if (user !== null) {
-      console.log(user);
+    setDocDbRoot(AppDB.collection('documents'));
+    setUsersRoot(AppDB.collection('users'));
+  });
+
+  useEffect(() => {
+    console.log('called')
+    if (user) {
+      setUidState(user.uid);
     }
   }, [user]);
 
+  // useEffect(() => {
+  //   if (uidState) {
+  //     const stateSubcription = docDbRoot.doc(uidState).onSnapshot((snapshot) => {
+  //       console.log(snapshot);
+  //     });
+
+  //     return stateSubcription();
+  //   }
+  //   return null;
+  // });
+
   const onTabChange = (event, value) => {
     setTabIndex(value);
-    console.log(`Tab value changed to ${value}`);
   };
 
   const render = () => {
-    if (user !== null) {
+    if (user) {
       return (
         <div>
           <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} authInstance={{ user, signOut }} />
@@ -70,10 +86,13 @@ const DashboardScreen = ({ authInstance }) => {
         </div>
       );
     }
-
-    return <Redirect exact path="/" />;
+    if (user === undefined) {
+      return (
+        <div />
+      );
+    }
+    return <Redirect path="/" />;
   };
-
   return <div>{render()}</div>;
 };
 
