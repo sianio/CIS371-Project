@@ -31,8 +31,8 @@ import { AppDB } from '../firebase-init.js';
 //   );
 // };
 
-const DashboardScreen = ({ userStateHooks, signOut }) => {
-  const { userState, setUserState } = userStateHooks;
+const DashboardScreen = () => {
+
   // const [myDocList, setMyDocList] = useState([]);
   // const [sharedDocList, setShareDocList] = useState([]);
   // const [docDbRoot, setDocDbRoot] = useState(undefined);
@@ -50,7 +50,7 @@ const DashboardScreen = ({ userStateHooks, signOut }) => {
 
   const renderDashboard = () => (
     <div>
-      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} signOut={signOut} setUserState={setUserState} />
+      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} />
       <Paper>
         <List>
           <ListItem>
@@ -69,7 +69,7 @@ const DashboardScreen = ({ userStateHooks, signOut }) => {
   );
 
   const render = () => {
-    if (userState === null) {
+    if (false) {
       returnToLogin();
     }
     return renderDashboard();

@@ -13,7 +13,7 @@ const accountStyles = makeStyles(() => ({
 }));
 
 
-const AccountMenu = ({ signOut }) => {
+const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = accountStyles();
 
@@ -29,11 +29,6 @@ const AccountMenu = ({ signOut }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleSignOut = () => {
-    handleClose();
-    signOut();
   };
 
   return (
@@ -59,7 +54,7 @@ const AccountMenu = ({ signOut }) => {
         <MenuItem onClick={handleClose}>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleSignOut}>
+        <MenuItem onClick={handleClose}>
           Sign Out
         </MenuItem>
       </Menu>

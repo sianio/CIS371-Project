@@ -5,11 +5,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import HomeToolbar from '../components/toolbar/HomeToolbar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Box from '@material-ui/core/Box';
 import { sizing } from '@material-ui/system';
-import { AppAuth } from '../firebase-init';
+import HomeToolbar from '../components/toolbar/HomeToolbar';
 
 const loginStyle = makeStyles(() => ({
   root: {
@@ -19,7 +18,7 @@ const loginStyle = makeStyles(() => ({
     padding: 10,
     textAlign: 'center',
     display: 'inline-box',
-    background: '#c5cae9'
+    background: '#c5cae9',
   },
   textField: {
     width: 400,
@@ -35,11 +34,7 @@ const loginStyle = makeStyles(() => ({
   }
 }));
 
-const LoginScreen = ({ loginFunctions, userStateHooks }) => {
-
-  const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = loginFunctions;
-  const { userState } = userStateHooks;
-
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -47,11 +42,11 @@ const LoginScreen = ({ loginFunctions, userStateHooks }) => {
 
 
   const login = () => {
-    signInWithEmailAndPassword(email, password);
+    alert('You signed in?');
   };
 
   const signUp = () => {
-    createUserWithEmailAndPassword(email, password);
+    alert('You signed up');
   };
 
   const classes = loginStyle();
@@ -88,7 +83,7 @@ const LoginScreen = ({ loginFunctions, userStateHooks }) => {
         />
         <ButtonGroup
           variant="contained"
-          color="#e8eaf6"
+          // color="#e8eaf6"
           size="large"
           aria-label="large contained button group"
         >
@@ -100,7 +95,7 @@ const LoginScreen = ({ loginFunctions, userStateHooks }) => {
   );
 
   const checkRendering = () => {
-    if (!userState) {
+    if (true) {
       return renderLogin();
     }
     return routeToDashboard();

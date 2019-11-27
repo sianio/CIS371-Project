@@ -24,7 +24,7 @@ const dashboardStyle = makeStyles(() => ({
 }));
 
 const DashboardBar = (props) => {
-  const { tabVal, tabOnChange, signOut } = props;
+  const { tabVal, tabOnChange } = props;
   const classes = dashboardStyle();
 
   return (
@@ -42,7 +42,7 @@ const DashboardBar = (props) => {
           <Tab color="inherit" label="Shared With Me" />
         </Tabs>
         <NotificationMenu />
-        <AccountMenu signOut={signOut} />
+        <AccountMenu />
       </AppBar>
     </div>
   );
