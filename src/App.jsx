@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
 
 import LoginScreen from './screens/login-screen';
 import DashboardScreen from './screens/dashboard-screen';
-import { AppAuth } from './firebase-init';
 
-const App = (props) => {
+const LoginWithHistory = withRouter(LoginScreen);
+const DashboardWithHistory = withRouter(DashboardScreen);
+
+const App = () => {
+
+  const [uid, setUid] = useState(null);
 
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/login">
-            <LoginScreen />
+            <LoginScreen uidHooks={{ uid, setUid }} />
           </Route>
           <Route path="/dashboard">
-            <DashboardScreen />
+            <DashboardScreen uidHooks={{ uid, setUid }} />
           </Route>
         </Switch>
       </Router>

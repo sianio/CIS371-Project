@@ -9,7 +9,8 @@ import Paper from '@material-ui/core/Paper';
 
 import DashboardBar from '../components/toolbar/DashboardBar';
 
-import { AppDB } from '../firebase-init.js';
+import { AppAuth, AppDB } from '../firebase-init.js';
+import useFirebaseAuthentication from '../components/effects/auth-effects.js';
 
 // const DocumentItem = props => {
 //   const { docName, dateModified } = props;
@@ -38,11 +39,7 @@ const DashboardScreen = () => {
   // const [docDbRoot, setDocDbRoot] = useState(undefined);
   // const [usersRoot, setUsersRoot] = useState(undefined);
   const [tabIndex, setTabIndex] = useState(0);
-
-  // useEffect(() => {
-  //   setDocDbRoot(AppDB.collection('documents'));
-  //   setUsersRoot(AppDB.collection('users'));
-  // }, []);
+  const authUser = useFirebaseAuthentication(AppAuth);
 
   const onTabChange = (event, value) => {
     setTabIndex(value);
@@ -69,9 +66,11 @@ const DashboardScreen = () => {
   );
 
   const render = () => {
-    if (false) {
-      returnToLogin();
+    console.log(authUser);
+    if (authUser === null) {
+      return returnToLogin();
     }
+    console.log('got here');
     return renderDashboard();
   };
 

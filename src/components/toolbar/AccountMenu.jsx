@@ -5,6 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { AppAuth } from '../../firebase-init';
 
 const accountStyles = makeStyles(() => ({
   root: {
@@ -31,6 +32,11 @@ const AccountMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    handleClose();
+    AppAuth.signOut().then(() => console.log('signed out'));
+  };
+
   return (
     <div className={classes.root}>
       <IconButton onClick={handleClick}>
@@ -54,7 +60,7 @@ const AccountMenu = () => {
         <MenuItem onClick={handleClose}>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleSignOut}>
           Sign Out
         </MenuItem>
       </Menu>

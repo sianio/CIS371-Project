@@ -10,6 +10,9 @@ import Box from '@material-ui/core/Box';
 import { sizing } from '@material-ui/system';
 import HomeToolbar from '../components/toolbar/HomeToolbar';
 
+import { AppAuth } from '../firebase-init';
+import useFirebaseAuthentication from '../components/effects/auth-effects.js';
+
 const loginStyle = makeStyles(() => ({
   root: {
     height: 200,
@@ -34,19 +37,51 @@ const loginStyle = makeStyles(() => ({
   }
 }));
 
-const LoginScreen = () => {
+const LoginScreen = ({ uidHooks }) => {
+  const { uid, setUid } = uidHooks;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [loggedIn, setLoggedIn] = useState(false);
+  const authUser = useFirebaseAuthentication(AppAuth);
 
-  // TODO: Make this give some sort of message to the user saying invalid password
-
+  // useEffect(() => {
+  //   const unsubscribe = AppAuth.onAuthStateChanged((event) => {
+  //     if (event) {
+  //       setLoggedIn(true);
+  //       console.log('Event was true');
+  //     } else {
+  //       setLoggedIn(false);
+  //       console.log('Event was false');
+  //     }
+  //   });
+  //   unsubscribe();
+  // }, []);
 
   const login = () => {
-    alert('You signed in?');
+    AppAuth.signInWithEmailAndPassword(email, password)
+      .then((event) => {
+        console.log(event);
+        setUid(event.user.uid);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const signUp = () => {
-    alert('You signed up');
+    AppAuth.createUserWithEmailAndPassword(email, password)
+      .then((e) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const signOut = () => {
+    AppAuth.signOut()
+      .then(() => {
+        console.log('Signed out');
+      });
   };
 
   const classes = loginStyle();
@@ -89,13 +124,14 @@ const LoginScreen = () => {
         >
           <Button onClick={login}>Login</Button>
           <Button onClick={signUp}>Sign Up</Button>
+          <Button onClick={signOut}>Sign Out</Button>
         </ButtonGroup>
       </Paper>
     </Box>
   );
 
   const checkRendering = () => {
-    if (true) {
+    if (!authUser) {
       return renderLogin();
     }
     return routeToDashboard();
