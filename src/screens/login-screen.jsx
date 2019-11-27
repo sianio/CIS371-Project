@@ -37,13 +37,12 @@ const loginStyle = makeStyles(() => ({
   }
 }));
 
-const LoginScreen = ({ uidHooks }) => {
+const LoginScreen = ({ uidHooks, authHook }) => {
   const { uid, setUid } = uidHooks;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [loggedIn, setLoggedIn] = useState(false);
-  const authUser = useFirebaseAuthentication(AppAuth);
 
   // useEffect(() => {
   //   const unsubscribe = AppAuth.onAuthStateChanged((event) => {
@@ -131,7 +130,7 @@ const LoginScreen = ({ uidHooks }) => {
   );
 
   const checkRendering = () => {
-    if (!authUser) {
+    if (!authHook) {
       return renderLogin();
     }
     return routeToDashboard();

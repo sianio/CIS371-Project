@@ -14,7 +14,7 @@ const accountStyles = makeStyles(() => ({
 }));
 
 
-const AccountMenu = () => {
+const AccountMenu = ({ signOut, authHook }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = accountStyles();
 
@@ -34,7 +34,8 @@ const AccountMenu = () => {
 
   const handleSignOut = () => {
     handleClose();
-    AppAuth.signOut().then(() => console.log('signed out'));
+    signOut();
+    console.log(authHook);
   };
 
   return (
