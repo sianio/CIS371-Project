@@ -9,90 +9,72 @@ import Paper from '@material-ui/core/Paper';
 
 import DashboardBar from '../components/toolbar/DashboardBar';
 
-import { AppAuth, AppDB } from '../firebase-init.js';
+import { AppDB } from '../firebase-init.js';
 
-const DocumentItem = props => {
-  const { docName, dateModified } = props;
+// const DocumentItem = props => {
+//   const { docName, dateModified } = props;
 
-  const openDoc = () => {
-    // TODO: Open a document
-    alert(`Opening file ${docName}`);
-    return true;
-  };
+//   const openDoc = () => {
+//     // TODO: Open a document
+//     alert(`Opening file ${docName}`);
+//     return true;
+//   };
 
-  return (
-    <ListItem button onClick={openDoc}>
-      <ListItemIcon>
-        <DescriptionIcon />
-      </ListItemIcon>
-      <ListItemText primary={docName} />
-      <ListItemText primary={dateModified} />
-    </ListItem>
-  );
-};
+//   return (
+//     <ListItem button onClick={openDoc}>
+//       <ListItemIcon>
+//         <DescriptionIcon />
+//       </ListItemIcon>
+//       <ListItemText primary={docName} />
+//       <ListItemText primary={dateModified} />
+//     </ListItem>
+//   );
+// };
 
-const DashboardScreen = ({ authInstance }) => {
-  const { user, signOut } = authInstance;
-
+const DashboardScreen = ({ userStateHooks, signOut }) => {
+  const { userState, setUserState } = userStateHooks;
   // const [myDocList, setMyDocList] = useState([]);
   // const [sharedDocList, setShareDocList] = useState([]);
-  const [uidState, setUidState] = useState(undefined);
-  const [docDbRoot, setDocDbRoot] = useState(undefined);
-  const [usersRoot, setUsersRoot] = useState(undefined);
+  // const [docDbRoot, setDocDbRoot] = useState(undefined);
+  // const [usersRoot, setUsersRoot] = useState(undefined);
   const [tabIndex, setTabIndex] = useState(0);
 
-  useEffect(() => {
-    setDocDbRoot(AppDB.collection('documents'));
-    setUsersRoot(AppDB.collection('users'));
-  });
-
-  useEffect(() => {
-    console.log('called')
-    if (user) {
-      setUidState(user.uid);
-    }
-  }, [user]);
-
   // useEffect(() => {
-  //   if (uidState) {
-  //     const stateSubcription = docDbRoot.doc(uidState).onSnapshot((snapshot) => {
-  //       console.log(snapshot);
-  //     });
-
-  //     return stateSubcription();
-  //   }
-  //   return null;
-  // });
+  //   setDocDbRoot(AppDB.collection('documents'));
+  //   setUsersRoot(AppDB.collection('users'));
+  // }, []);
 
   const onTabChange = (event, value) => {
     setTabIndex(value);
   };
 
+  const renderDashboard = () => (
+    <div>
+      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} signOut={signOut} setUserState={setUserState} />
+      <Paper>
+        <List>
+          <ListItem>
+            <ListItemText primary="place1" />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="place2" />
+          </ListItem>
+        </List>
+      </Paper>
+    </div>
+  );
+
+  const returnToLogin = () => (
+    <Redirect to="/login" />
+  );
+
   const render = () => {
-    if (user) {
-      return (
-        <div>
-          <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} authInstance={{ user, signOut }} />
-          <Paper>
-            <List>
-              <ListItem>
-                <ListItemText primary="place1" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="place2" />
-              </ListItem>
-            </List>
-          </Paper>
-        </div>
-      );
+    if (userState === null) {
+      returnToLogin();
     }
-    if (user === undefined) {
-      return (
-        <div />
-      );
-    }
-    return <Redirect path="/" />;
+    return renderDashboard();
   };
+
   return <div>{render()}</div>;
 };
 

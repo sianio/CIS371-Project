@@ -23,7 +23,7 @@ const loginStyle = makeStyles(() => ({
   },
   textField: {
     width: 400,
-    padding: 10
+    padding: 10,
   },
   heading: {
     width: 600,
@@ -35,21 +35,16 @@ const loginStyle = makeStyles(() => ({
   }
 }));
 
-const LoginScreen = ({ authInstance }) => {
-  const {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    user,
-    error,
-    signOut
-  } = authInstance;
+const LoginScreen = ({ loginFunctions, userStateHooks }) => {
+
+  const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = loginFunctions;
+  const { userState } = userStateHooks;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // TODO: Make this give some sort of message to the user saying invalid password
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
+
 
   const login = () => {
     signInWithEmailAndPassword(email, password);
@@ -76,7 +71,7 @@ const LoginScreen = ({ authInstance }) => {
           required
           variant="outlined"
           className={classes.textField}
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           value={email}
           type="text"
           label="Username"
@@ -86,7 +81,7 @@ const LoginScreen = ({ authInstance }) => {
           required
           variant="outlined"
           className={classes.textField}
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           value={password}
           type="password"
           label="Password"
@@ -99,14 +94,13 @@ const LoginScreen = ({ authInstance }) => {
         >
           <Button onClick={login}>Login</Button>
           <Button onClick={signUp}>Sign Up</Button>
-          {/* <Button onClick={logout}>Log Out (PLACEHOLDER)</Button> */}
         </ButtonGroup>
       </Paper>
     </Box>
   );
 
   const checkRendering = () => {
-    if (user === null || user === undefined) {
+    if (!userState) {
       return renderLogin();
     }
     return routeToDashboard();
