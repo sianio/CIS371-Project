@@ -6,10 +6,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-// import { AuthStore } from '../../reducers/authReducer';
-// import { AppAuth } from '../../firebase-init';
-// TODO: Implement functionality for buttons in menu.
-
 const accountStyles = makeStyles(() => ({
   root: {
     // flexGrow: 1,
@@ -17,8 +13,7 @@ const accountStyles = makeStyles(() => ({
 }));
 
 
-const AccountMenu = ({ authInstance }) => {
-  const { user, signOut } = authInstance;
+const AccountMenu = ({ signOut }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = accountStyles();
 
