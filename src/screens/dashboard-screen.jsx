@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 
 import DashboardBar from '../components/toolbar/DashboardBar';
 
-import { AppAuth, AppDB } from '../firebase-init.js';
+import { AppDB } from '../firebase-init.js';
 
 // const DocumentItem = props => {
 //   const { docName, dateModified } = props;
@@ -31,7 +31,8 @@ import { AppAuth, AppDB } from '../firebase-init.js';
 //   );
 // };
 
-const DashboardScreen = ({ authHook }) => {
+const DashboardScreen = ({ authProps }) => {
+  const { AppAuth, authHook } = authProps;
 
   // const [myDocList, setMyDocList] = useState([]);
   // const [sharedDocList, setShareDocList] = useState([]);
@@ -43,14 +44,9 @@ const DashboardScreen = ({ authHook }) => {
     setTabIndex(value);
   };
 
-  const signOut = () => {
-    AppAuth.signOut().then(() => console.log('Signed Out'));
-    console.log(authHook);
-  };
-
   const renderDashboard = () => (
     <div>
-      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} signOut={signOut} authHook={authHook} />
+      <DashboardBar tabVal={tabIndex} tabOnChange={onTabChange} authProps={authProps} />
       <Paper>
         <List>
           <ListItem>

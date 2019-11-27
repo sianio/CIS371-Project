@@ -5,7 +5,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // import Box from '@material-ui/core/Box';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { AppAuth } from '../../firebase-init';
+import { Redirect } from 'react-router-dom';
 
 const accountStyles = makeStyles(() => ({
   root: {
@@ -14,7 +14,8 @@ const accountStyles = makeStyles(() => ({
 }));
 
 
-const AccountMenu = ({ signOut, authHook }) => {
+const AccountMenu = ({ authProps }) => {
+  const { AppAuth, authHook } = authProps;
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = accountStyles();
 
@@ -34,11 +35,17 @@ const AccountMenu = ({ signOut, authHook }) => {
 
   const handleSignOut = () => {
     handleClose();
-    signOut();
-    console.log(authHook);
+    AppAuth.signOut().then(() => {
+      console.log('Sigining out');
+      console.log(authHook);
+    });
   };
 
-  return (
+  const returnToLogin = () => (
+    <Redirect to="/login" />
+  );
+
+  const renderMenu = () => (
     <div className={classes.root}>
       <IconButton onClick={handleClick}>
         <AccountCircleIcon />
@@ -65,6 +72,19 @@ const AccountMenu = ({ signOut, authHook }) => {
           Sign Out
         </MenuItem>
       </Menu>
+    </div>
+  );
+
+  const render = () => {
+    if (authHook) {
+      return renderMenu();
+    }
+    return returnToLogin();
+  }
+
+  return (
+    <div>
+      {render()}
     </div>
   );
 };

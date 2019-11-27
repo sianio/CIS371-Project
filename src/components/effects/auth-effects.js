@@ -10,10 +10,11 @@ const useFirebaseAuthentication = (firebaseAuth) => {
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         setAuthUser(user);
       } else {
-        setAuthUser(user);
+        setAuthUser(null);
       }
     });
 

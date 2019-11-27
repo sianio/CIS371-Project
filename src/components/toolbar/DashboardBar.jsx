@@ -25,7 +25,8 @@ const dashboardStyle = makeStyles(() => ({
 
 const DashboardBar = (props) => {
   // eslint-disable-next-line object-curly-newline
-  const { tabVal, tabOnChange, signOut, authHook } = props;
+  const { tabVal, tabOnChange, signOut, authProps } = props;
+  const { AppAuth, authHook } = authProps;
   const classes = dashboardStyle();
 
   return (
@@ -43,7 +44,7 @@ const DashboardBar = (props) => {
           <Tab color="inherit" label="Shared With Me" />
         </Tabs>
         <NotificationMenu />
-        <AccountMenu signOut={signOut} authHook={authHook} />
+        <AccountMenu signOut={signOut} authProps={authProps} />
       </AppBar>
     </div>
   );

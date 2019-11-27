@@ -15,16 +15,17 @@ const App = () => {
 
   const [uid, setUid] = useState(null);
   const authHook = useFirebaseAuthentication(AppAuth);
+  const authProps = { AppAuth, authHook}
 
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/login">
-            <LoginScreen uidHooks={{ uid, setUid }} authHook={authHook} />
+            <LoginScreen uidHooks={{ uid, setUid }} authProps={authProps} />
           </Route>
           <Route path="/dashboard">
-            <DashboardScreen uidHooks={{ uid, setUid }} authHook={authHook} />
+            <DashboardScreen uidHooks={{ uid, setUid }} authProps={authProps} />
           </Route>
         </Switch>
       </Router>

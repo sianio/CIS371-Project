@@ -10,7 +10,6 @@ import Box from '@material-ui/core/Box';
 import { sizing } from '@material-ui/system';
 import HomeToolbar from '../components/toolbar/HomeToolbar';
 
-import { AppAuth } from '../firebase-init';
 import useFirebaseAuthentication from '../components/effects/auth-effects.js';
 
 const loginStyle = makeStyles(() => ({
@@ -37,25 +36,12 @@ const loginStyle = makeStyles(() => ({
   }
 }));
 
-const LoginScreen = ({ uidHooks, authHook }) => {
+const LoginScreen = ({ uidHooks, authProps }) => {
   const { uid, setUid } = uidHooks;
+  const { AppAuth, authHook } = authProps;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [loggedIn, setLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   const unsubscribe = AppAuth.onAuthStateChanged((event) => {
-  //     if (event) {
-  //       setLoggedIn(true);
-  //       console.log('Event was true');
-  //     } else {
-  //       setLoggedIn(false);
-  //       console.log('Event was false');
-  //     }
-  //   });
-  //   unsubscribe();
-  // }, []);
 
   const login = () => {
     AppAuth.signInWithEmailAndPassword(email, password)
